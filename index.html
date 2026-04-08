@@ -1,1 +1,769 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SITUA — Sistemas Inovadores com Tecnologias Unificadas e Aplicadas</title>
+  <meta name="description" content="SITUA integra atendimento, automação, redes, áudio e vídeo e monitoramento inteligente em uma plataforma de soluções para ambientes, negócios e experiências conectadas." />
+  <meta name="theme-color" content="#0b1020" />
+  <meta property="og:title" content="SITUA" />
+  <meta property="og:description" content="Tecnologia integrada para ambientes, operações e experiências conectadas." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="assets/logo-horizontal-preto.png" />
+  <link rel="icon" type="image/png" href="assets/favicon.png" />
+  <style>
+    :root {
+      --bg: #07111f;
+      --bg-soft: #0d1930;
+      --panel: rgba(14, 26, 49, 0.78);
+      --line: rgba(255,255,255,0.12);
+      --text: #eef4ff;
+      --muted: #9bb0d3;
+      --primary: #4da3ff;
+      --primary-2: #7f5cff;
+      --accent: #3ee6c5;
+      --shadow: 0 30px 80px rgba(0,0,0,0.35);
+      --radius: 24px;
+      --max: 1180px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 15% 20%, rgba(77,163,255,0.22), transparent 28%),
+        radial-gradient(circle at 85% 18%, rgba(127,92,255,0.22), transparent 24%),
+        radial-gradient(circle at 50% 100%, rgba(62,230,197,0.10), transparent 26%),
+        linear-gradient(180deg, #08101c 0%, #07111f 40%, #060b15 100%);
+      line-height: 1.55;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    .container {
+      width: min(calc(100% - 40px), var(--max));
+      margin: 0 auto;
+    }
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(16px);
+      background: rgba(7,17,31,0.62);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .nav-inner {
+      min-height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+    }
+
+    .brand-logo {
+      height: 42px;
+      width: auto;
+      object-fit: contain;
+      flex-shrink: 0;
+    }
+
+    .brand small {
+      display: block;
+      color: var(--muted);
+      letter-spacing: 0.03em;
+      font-weight: 600;
+      font-size: 11px;
+      margin-top: 2px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .nav-links a:hover { color: var(--text); }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 14px 20px;
+      border-radius: 16px;
+      border: 1px solid transparent;
+      font-weight: 700;
+      transition: 0.25s ease;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      color: white;
+      background: linear-gradient(135deg, var(--primary), var(--primary-2));
+      box-shadow: 0 14px 34px rgba(77,163,255,0.22);
+    }
+
+    .btn-primary:hover { transform: translateY(-1px); }
+
+    .btn-ghost {
+      color: var(--text);
+      background: rgba(255,255,255,0.04);
+      border-color: rgba(255,255,255,0.10);
+    }
+
+    .hero {
+      padding: 74px 0 56px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-grid {
+      display: block;
+    }
+
+    .hero-content {
+      width: 100%;
+      max-width: 100%;
+    }
+
+    .hero-title {
+      width: 100%;
+      max-width: 100%;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #cfe2ff;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(40px, 7vw, 72px);
+      line-height: 0.98;
+      letter-spacing: -0.04em;
+    }
+
+    .hero p {
+      margin: 22px 0 0;
+      color: var(--muted);
+      font-size: clamp(18px, 2.2vw, 22px);
+      max-width: 700px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 28px;
+    }
+
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-top: 30px;
+    }
+
+    .stat {
+      padding: 18px;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 24px;
+      margin-bottom: 6px;
+    }
+
+    .stat span { color: var(--muted); font-size: 14px; }
+
+    .hero-card {
+      position: relative;
+      background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.03));
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 30px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      min-height: 560px;
+    }
+
+    .hero-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 20% 25%, rgba(77,163,255,0.24), transparent 20%),
+        radial-gradient(circle at 76% 28%, rgba(127,92,255,0.20), transparent 18%),
+        linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0));
+      pointer-events: none;
+    }
+
+    .dashboard {
+      position: relative;
+      padding: 22px;
+      height: 100%;
+      display: grid;
+      gap: 16px;
+    }
+
+    .dashboard-top,
+    .dashboard-mid,
+    .dashboard-bottom {
+      display: grid;
+      gap: 16px;
+    }
+
+    .dashboard-top { grid-template-columns: 1.1fr 0.9fr; }
+    .dashboard-mid { grid-template-columns: 0.9fr 1.1fr; }
+    .dashboard-bottom { grid-template-columns: repeat(3, 1fr); }
+
+    .mini-card {
+      background: var(--panel);
+      border: 1px solid rgba(255,255,255,0.10);
+      border-radius: 22px;
+      padding: 18px;
+      backdrop-filter: blur(8px);
+      min-height: 120px;
+    }
+
+    .mini-card h3 {
+      margin: 0 0 8px;
+      font-size: 15px;
+      color: #d9e8ff;
+    }
+
+    .mini-card p, .mini-card li {
+      margin: 0;
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    .mini-card ul {
+      padding-left: 18px;
+      margin: 0;
+      display: grid;
+      gap: 8px;
+    }
+
+    .signal {
+      display: flex;
+      align-items: flex-end;
+      gap: 10px;
+      height: 96px;
+      margin-top: 12px;
+    }
+
+    .signal span {
+      flex: 1;
+      border-radius: 12px 12px 6px 6px;
+      background: linear-gradient(180deg, rgba(77,163,255,0.95), rgba(127,92,255,0.85));
+      opacity: 0.88;
+    }
+
+    .signal span:nth-child(1) { height: 36%; }
+    .signal span:nth-child(2) { height: 52%; }
+    .signal span:nth-child(3) { height: 76%; }
+    .signal span:nth-child(4) { height: 58%; }
+    .signal span:nth-child(5) { height: 88%; }
+
+    section { padding: 34px 0; }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 20px;
+      margin-bottom: 24px;
+    }
+
+    .section-head h2 {
+      margin: 0;
+      font-size: clamp(28px, 4vw, 44px);
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+    }
+
+    .section-head p {
+      margin: 0;
+      color: var(--muted);
+      max-width: 620px;
+      font-size: 17px;
+    }
+
+    .grid-5 {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 16px;
+    }
+
+    .solution-card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
+      border: 1px solid rgba(255,255,255,0.10);
+      border-radius: 24px;
+      padding: 22px;
+      transition: 0.25s ease;
+      min-height: 280px;
+    }
+
+    .solution-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(77,163,255,0.35);
+      box-shadow: 0 18px 50px rgba(0,0,0,0.24);
+    }
+
+    .icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 16px;
+      display: grid;
+      place-items: center;
+      font-size: 22px;
+      background: linear-gradient(135deg, rgba(77,163,255,0.18), rgba(127,92,255,0.18));
+      border: 1px solid rgba(255,255,255,0.10);
+      margin-bottom: 18px;
+    }
+
+    .solution-card h3 {
+      margin: 0 0 10px;
+      font-size: 22px;
+      letter-spacing: -0.02em;
+    }
+
+    .solution-card p {
+      margin: 0 0 16px;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .pill-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .pill {
+      font-size: 12px;
+      font-weight: 700;
+      color: #d9e8ff;
+      padding: 8px 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .about-grid,
+    .cta-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .panel {
+      background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
+      border: 1px solid rgba(255,255,255,0.10);
+      border-radius: 28px;
+      padding: 28px;
+      box-shadow: var(--shadow);
+    }
+
+    .panel h3 { margin: 0 0 12px; font-size: 28px; letter-spacing: -0.02em; }
+    .panel p { margin: 0; color: var(--muted); }
+
+    .check-list {
+      display: grid;
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .check {
+      display: grid;
+      grid-template-columns: 32px 1fr;
+      gap: 14px;
+      align-items: start;
+      color: #dce8fb;
+    }
+
+    .check i {
+      width: 32px;
+      height: 32px;
+      display: grid;
+      place-items: center;
+      border-radius: 12px;
+      font-style: normal;
+      background: rgba(62,230,197,0.12);
+      border: 1px solid rgba(62,230,197,0.24);
+      color: var(--accent);
+    }
+
+    .process {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    .step {
+      padding: 22px;
+      border-radius: 24px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .step strong {
+      display: inline-flex;
+      margin-bottom: 14px;
+      color: #cfe2ff;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .step h3 { margin: 0 0 10px; font-size: 22px; }
+    .step p { margin: 0; color: var(--muted); }
+
+    .cta {
+      padding-bottom: 80px;
+    }
+
+    .cta-card {
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 0% 0%, rgba(77,163,255,0.25), transparent 28%),
+        radial-gradient(circle at 100% 100%, rgba(127,92,255,0.24), transparent 28%),
+        linear-gradient(180deg, rgba(255,255,255,0.07), rgba(255,255,255,0.03));
+    }
+
+    .cta-card h2 {
+      margin: 0;
+      font-size: clamp(32px, 4vw, 52px);
+      line-height: 1.02;
+      letter-spacing: -0.03em;
+    }
+
+    .cta-card p {
+      margin: 16px 0 0;
+      color: var(--muted);
+      max-width: 760px;
+      font-size: 18px;
+    }
+
+    footer {
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding: 24px 0 40px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      align-items: center;
+    }
+
+    .menu-btn {
+      display: none;
+      background: none;
+      border: 0;
+      color: white;
+      font-size: 28px;
+      cursor: pointer;
+    }
+
+    @media (max-width: 1080px) {
+      .about-grid,
+      .cta-grid,
+      .grid-5,
+      .process {
+        grid-template-columns: 1fr 1fr;
+      }
+      .dashboard-top,
+      .dashboard-mid,
+      .dashboard-bottom { grid-template-columns: 1fr 1fr; }
+      .hero-card { min-height: auto; }
+    }
+
+    @media (max-width: 780px) {
+      .nav-inner { min-height: 72px; }
+      .menu-btn { display: block; }
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 72px;
+        left: 20px;
+        right: 20px;
+        padding: 18px;
+        border-radius: 20px;
+        background: rgba(8,16,28,0.98);
+        border: 1px solid rgba(255,255,255,0.08);
+        box-shadow: var(--shadow);
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .nav-links.open { display: flex; }
+
+      .about-grid,
+      .cta-grid,
+      .grid-5,
+      .process,
+      .dashboard-top,
+      .dashboard-mid,
+      .dashboard-bottom,
+      .hero-stats {
+        grid-template-columns: 1fr;
+      }
+
+      h1 { font-size: 42px; }
+      .section-head { flex-direction: column; align-items: start; }
+      .footer-inner { flex-direction: column; align-items: start; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a class="brand" href="#inicio" aria-label="SITUA - início">
+        <img class="brand-logo" src="assets/logo-horizontal-branco.png" alt="SITUA" />
+      </a>
+
+      <button class="menu-btn" id="menuBtn" aria-label="Abrir menu">☰</button>
+
+      <div class="nav-links" id="navLinks">
+        <a href="#solucoes">Soluções</a>
+        <a href="#sobre">Sobre</a>
+        <a href="#processo">Processo</a>
+        
+        
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero" id="inicio">
+    <div class="container hero-grid">
+      <div class="hero-content">
+        <img src="assets/logo-horizontal-branco.png" alt="SITUA" style="height: 64px; width: auto; margin-bottom: 22px;" />
+        <div class="eyebrow">Tecnologia integrada para ambientes, operações e experiências conectadas</div>
+        <h1 class="hero-title">
+          A tecnologia deixa de ser isolada. <span style="background: linear-gradient(135deg, #ffffff, #9cd0ff 42%, #9cb4ff 74%, #90ffe8); -webkit-background-clip: text; background-clip: text; color: transparent;">Na SITUA, tudo conversa.</span>
+        </h1>
+        <p>
+          Projetamos soluções que unem atendimento, automação, redes, áudio e vídeo e inteligência de monitoramento em sistemas vivos, bidirecionais e prontos para transformar ambientes em experiências mais eficientes, seguras e memoráveis.
+        </p>
+
+        <div class="hero-actions">
+          <a href="#contato" class="btn btn-primary">Solicitar apresentação</a>
+          <a href="#solucoes" class="btn btn-ghost">Conhecer verticais</a>
+        </div>
+
+        <div class="hero-stats">
+          <div class="stat">
+            <strong>5 frentes</strong>
+            <span>atuando de forma integrada</span>
+          </div>
+          <div class="stat">
+            <strong>360°</strong>
+            <span>visão de operação e experiência</span>
+          </div>
+          <div class="stat">
+            <strong>1 ecossistema</strong>
+            <span>menos ruído, mais inteligência</span>
+          </div>
+        </div>
+      </div>
+
+      </div>
+  </header>
+
+  <section id="solucoes">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">Verticais de atuação</div>
+          <h2>Uma marca. Cinco frentes. Uma lógica integrada.</h2>
+        </div>
+        <p>
+          Cada vertical resolve uma camada estratégica da operação. Juntas, elas formam um sistema coerente, escalável e inteligente para empresas, ambientes e projetos de alto valor.
+        </p>
+      </div>
+
+      <div class="grid-5">
+        <article class="solution-card">
+          <div class="icon">◎</div>
+          <h3>SITUA Atend</h3>
+          <p>Gestão de atendimento e relacionamento com foco em fluidez, resposta e acompanhamento de jornadas.</p>
+          <div class="pill-list">
+            <span class="pill">fluxo</span>
+            <span class="pill">interface</span>
+            <span class="pill">eficiência</span>
+          </div>
+        </article>
+
+        <article class="solution-card">
+          <div class="icon">◌</div>
+          <h3>SITUA Control</h3>
+          <p>Automação de ambientes, rotinas, dispositivos e operações para elevar controle, conforto e produtividade.</p>
+          <div class="pill-list">
+            <span class="pill">automação</span>
+            <span class="pill">cenas</span>
+            <span class="pill">controle</span>
+          </div>
+        </article>
+
+        <article class="solution-card">
+          <div class="icon">▣</div>
+          <h3>SITUA Connect</h3>
+          <p>Redes, conectividade, integração de sistemas e infraestrutura digital robusta para suportar crescimento e estabilidade.</p>
+          <div class="pill-list">
+            <span class="pill">rede</span>
+            <span class="pill">wifi</span>
+            <span class="pill">integração</span>
+          </div>
+        </article>
+
+        <article class="solution-card">
+          <div class="icon">✦</div>
+          <h3>SITUA Experience</h3>
+          <p>Áudio, vídeo e ambientes imersivos que transformam espaços em experiências mais marcantes e sofisticadas.</p>
+          <div class="pill-list">
+            <span class="pill">áudio</span>
+            <span class="pill">vídeo</span>
+            <span class="pill">ambientes</span>
+          </div>
+        </article>
+
+        <article class="solution-card">
+          <div class="icon">◍</div>
+          <h3>SITUA Security</h3>
+          <p>Inteligência de monitoramento para ampliar visibilidade, prevenção, rastreabilidade e resposta operacional.</p>
+          <div class="pill-list">
+            <span class="pill">monitoramento</span>
+            <span class="pill">inteligência</span>
+            <span class="pill">segurança</span>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="sobre">
+    <div class="container about-grid">
+      <div class="panel">
+        <div class="eyebrow">Posicionamento</div>
+        <h3>Tecnologia que conecta estrutura, operação e experiência.</h3>
+        <p>
+          A SITUA nasce para organizar a complexidade. Em vez de soluções isoladas, criamos ecossistemas tecnológicos em que infraestrutura, comando, percepção e resposta trabalham juntos.
+        </p>
+        <div class="check-list">
+          <div class="check"><i>✓</i><div><strong>Integração real</strong><br><span style="color:var(--muted)">Soluções desenhadas para conversar entre si.</span></div></div>
+          <div class="check"><i>✓</i><div><strong>Leitura de contexto</strong><br><span style="color:var(--muted)">Ambientes mais inteligentes, responsivos e úteis.</span></div></div>
+          <div class="check"><i>✓</i><div><strong>Entrega premium</strong><br><span style="color:var(--muted)">Tecnologia com estética, confiabilidade e presença de marca.</span></div></div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="eyebrow">Conceito</div>
+        <h3>Sistemas vivos = bidirecionais</h3>
+        <p>
+          Para a SITUA, um sistema vivo não apenas executa comandos. Ele recebe dados, interpreta sinais, devolve respostas e cria um ciclo contínuo entre ambiente, operação e pessoas. Isso torna a tecnologia mais útil, mais perceptiva e muito mais estratégica.
+        </p>
+        <div class="check-list">
+          <div class="check"><i>↔</i><div><strong>Entrada e resposta</strong><br><span style="color:var(--muted)">O sistema escuta, processa e reage.</span></div></div>
+          <div class="check"><i>⟳</i><div><strong>Fluxo contínuo</strong><br><span style="color:var(--muted)">Dados e ações deixam de ser eventos isolados.</span></div></div>
+          <div class="check"><i>⌁</i><div><strong>Mais valor operacional</strong><br><span style="color:var(--muted)">Melhor decisão, melhor experiência, melhor controle.</span></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="processo">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">Como trabalhamos</div>
+          <h2>Da leitura do ambiente à integração final.</h2>
+        </div>
+        <p>
+          Nosso processo foi pensado para unir estratégia, técnica e execução com clareza. Cada projeto começa entendendo o contexto real e termina com uma solução consistente, escalável e pronta para evoluir.
+        </p>
+      </div>
+
+      <div class="process">
+        <article class="step">
+          <strong>01 · Diagnóstico</strong>
+          <h3>Entender o cenário</h3>
+          <p>Mapeamos objetivos, dores, fluxos, infraestrutura existente e oportunidades de integração.</p>
+        </article>
+        <article class="step">
+          <strong>02 · Arquitetura</strong>
+          <h3>Desenhar a lógica</h3>
+          <p>Definimos a solução ideal, os pontos de conexão e a inteligência operacional do sistema.</p>
+        </article>
+        <article class="step">
+          <strong>03 · Implantação</strong>
+          <h3>Executar com precisão</h3>
+          <p>Implementamos cada frente com padrão técnico, organização visual e consistência de entrega.</p>
+        </article>
+        <article class="step">
+          <strong>04 · Evolução</strong>
+          <h3>Manter vivo</h3>
+          <p>Ajustamos, ampliamos e refinamos a solução para acompanhar o crescimento da operação.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  
+
+  <footer>
+    <div class="container footer-inner">
+      <div>© <span id="year"></span> SITUA. Todos os direitos reservados.</div>
+      <div>Sistemas Inovadores com Tecnologias Unificadas e Aplicadas.</div>
+    </div>
+  </footer>
+
+  <script>
+    const menuBtn = document.getElementById('menuBtn');
+    const navLinks = document.getElementById('navLinks');
+    const year = document.getElementById('year');
+    year.textContent = new Date().getFullYear();
+
+    menuBtn?.addEventListener('click', () => {
+      navLinks.classList.toggle('open');
+    });
+
+    navLinks?.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => navLinks.classList.remove('open'));
+    });
+  </script>
+</body>
+</html>
 
