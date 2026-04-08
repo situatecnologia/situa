@@ -15,6 +15,7 @@
   <link rel="icon" href="assets/favicon.ico" />
   <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png" />
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
+
   <style>
     :root {
       --bg: #07111f;
@@ -33,6 +34,7 @@
 
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
+
     body {
       margin: 0;
       font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
@@ -57,13 +59,14 @@
       position: sticky;
       top: 0;
       z-index: 50;
-      backdrop-filter: blur(16px);
-      background: rgba(7,17,31,0.62);
+      backdrop-filter: blur(20px);
+      background: linear-gradient(180deg, rgba(7,17,31,0.82), rgba(7,17,31,0.62));
       border-bottom: 1px solid rgba(255,255,255,0.06);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.14);
     }
 
     .nav-inner {
-      min-height: 80px;
+      min-height: 84px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -79,35 +82,26 @@
     }
 
     .brand-logo {
-      height: 42px;
+      height: 46px;
       width: auto;
       object-fit: contain;
       flex-shrink: 0;
     }
 
-    .brand small {
-      display: block;
-      color: var(--muted);
-      letter-spacing: 0.03em;
-      font-weight: 600;
-      font-size: 11px;
-      margin-top: 2px;
-    }
-
     .nav-links {
       display: flex;
       align-items: center;
-      gap: 22px;
+      gap: 28px;
       color: var(--muted);
       font-size: 15px;
     }
-
-    .nav-links a:hover { color: var(--text); }
 
     .nav-links a {
       position: relative;
       transition: color 0.25s ease;
     }
+
+    .nav-links a:hover { color: var(--text); }
 
     .nav-links a::after {
       content: "";
@@ -140,10 +134,13 @@
     .btn-primary {
       color: white;
       background: linear-gradient(135deg, var(--primary), var(--primary-2));
-      box-shadow: 0 14px 34px rgba(77,163,255,0.22);
+      box-shadow: 0 16px 40px rgba(77,163,255,0.22);
     }
 
-    .btn-primary:hover { transform: translateY(-1px); }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 22px 50px rgba(77,163,255,0.26);
+    }
 
     .btn-ghost {
       color: var(--text);
@@ -151,10 +148,43 @@
       border-color: rgba(255,255,255,0.10);
     }
 
+    .btn-ghost:hover {
+      transform: translateY(-2px);
+      border-color: rgba(255,255,255,0.18);
+      background: rgba(255,255,255,0.06);
+    }
+
     .hero {
-      padding: 88px 0 72px;
+      padding: 110px 0 88px;
       position: relative;
       overflow: hidden;
+      isolation: isolate;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 18% 20%, rgba(77,163,255,0.16), transparent 26%),
+        radial-gradient(circle at 82% 22%, rgba(127,92,255,0.16), transparent 22%),
+        linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0));
+      pointer-events: none;
+      z-index: -2;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      right: -140px;
+      top: 30px;
+      width: 480px;
+      height: 480px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(127,92,255,0.16), rgba(127,92,255,0));
+      filter: blur(20px);
+      pointer-events: none;
+      z-index: -1;
     }
 
     .hero-grid {
@@ -164,11 +194,13 @@
     .hero-content {
       width: 100%;
       max-width: 100%;
+      position: relative;
     }
 
     .hero-title {
       width: 100%;
-      max-width: 100%;
+      max-width: 1180px;
+      text-wrap: balance;
     }
 
     .eyebrow {
@@ -195,24 +227,25 @@
     }
 
     .hero p {
-      margin: 22px 0 0;
+      margin: 28px 0 0;
       color: var(--muted);
-      font-size: clamp(18px, 2.2vw, 22px);
-      max-width: 700px;
+      font-size: clamp(20px, 2.1vw, 24px);
+      max-width: 860px;
     }
 
     .hero-actions {
       display: flex;
       flex-wrap: wrap;
       gap: 14px;
-      margin-top: 28px;
+      margin-top: 38px;
     }
 
     .hero-stats {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 14px;
-      margin-top: 30px;
+      gap: 16px;
+      margin-top: 44px;
+      max-width: 1020px;
     }
 
     .stat {
@@ -235,96 +268,10 @@
       margin-bottom: 6px;
     }
 
-    .stat span { color: var(--muted); font-size: 14px; }
-
-    .hero-card {
-      position: relative;
-      background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.03));
-      border: 1px solid rgba(255,255,255,0.12);
-      border-radius: 30px;
-      box-shadow: var(--shadow);
-      overflow: hidden;
-      min-height: 560px;
-    }
-
-    .hero-card::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(circle at 20% 25%, rgba(77,163,255,0.24), transparent 20%),
-        radial-gradient(circle at 76% 28%, rgba(127,92,255,0.20), transparent 18%),
-        linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0));
-      pointer-events: none;
-    }
-
-    .dashboard {
-      position: relative;
-      padding: 22px;
-      height: 100%;
-      display: grid;
-      gap: 16px;
-    }
-
-    .dashboard-top,
-    .dashboard-mid,
-    .dashboard-bottom {
-      display: grid;
-      gap: 16px;
-    }
-
-    .dashboard-top { grid-template-columns: 1.1fr 0.9fr; }
-    .dashboard-mid { grid-template-columns: 0.9fr 1.1fr; }
-    .dashboard-bottom { grid-template-columns: repeat(3, 1fr); }
-
-    .mini-card {
-      background: var(--panel);
-      border: 1px solid rgba(255,255,255,0.10);
-      border-radius: 22px;
-      padding: 18px;
-      backdrop-filter: blur(8px);
-      min-height: 120px;
-    }
-
-    .mini-card h3 {
-      margin: 0 0 8px;
-      font-size: 15px;
-      color: #d9e8ff;
-    }
-
-    .mini-card p, .mini-card li {
-      margin: 0;
-      font-size: 14px;
+    .stat span {
       color: var(--muted);
+      font-size: 14px;
     }
-
-    .mini-card ul {
-      padding-left: 18px;
-      margin: 0;
-      display: grid;
-      gap: 8px;
-    }
-
-    .signal {
-      display: flex;
-      align-items: flex-end;
-      gap: 10px;
-      height: 96px;
-      margin-top: 12px;
-    }
-
-    .signal span {
-      flex: 1;
-      border-radius: 12px 12px 6px 6px;
-      background: linear-gradient(180deg, rgba(77,163,255,0.95), rgba(127,92,255,0.85));
-      opacity: 0.88;
-    }
-
-    .signal span:nth-child(1) { height: 36%; }
-    .signal span:nth-child(2) { height: 52%; }
-    .signal span:nth-child(3) { height: 76%; }
-    .signal span:nth-child(4) { height: 58%; }
-    .signal span:nth-child(5) { height: 88%; }
 
     section { padding: 54px 0; }
 
@@ -395,24 +342,32 @@
       background: linear-gradient(135deg, rgba(77,163,255,0.18), rgba(127,92,255,0.18));
       border: 1px solid rgba(255,255,255,0.10);
       margin-bottom: 18px;
+      position: relative;
+      z-index: 1;
     }
 
     .solution-card h3 {
       margin: 0 0 10px;
       font-size: 22px;
       letter-spacing: -0.02em;
+      position: relative;
+      z-index: 1;
     }
 
     .solution-card p {
       margin: 0 0 16px;
       color: var(--muted);
       font-size: 15px;
+      position: relative;
+      z-index: 1;
     }
 
     .pill-list {
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
+      position: relative;
+      z-index: 1;
     }
 
     .pill {
@@ -425,8 +380,7 @@
       border: 1px solid rgba(255,255,255,0.08);
     }
 
-    .about-grid,
-    .cta-grid {
+    .about-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 18px;
@@ -436,12 +390,27 @@
       background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
       border: 1px solid rgba(255,255,255,0.10);
       border-radius: 28px;
-      padding: 28px;
+      padding: 32px;
       box-shadow: var(--shadow);
+      transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
     }
 
-    .panel h3 { margin: 0 0 12px; font-size: 28px; letter-spacing: -0.02em; }
-    .panel p { margin: 0; color: var(--muted); }
+    .panel:hover {
+      transform: translateY(-4px);
+      border-color: rgba(77,163,255,0.22);
+      box-shadow: 0 34px 90px rgba(0,0,0,0.26);
+    }
+
+    .panel h3 {
+      margin: 0 0 12px;
+      font-size: 28px;
+      letter-spacing: -0.02em;
+    }
+
+    .panel p {
+      margin: 0;
+      color: var(--muted);
+    }
 
     .check-list {
       display: grid;
@@ -476,10 +445,17 @@
     }
 
     .step {
-      padding: 22px;
+      padding: 24px;
       border-radius: 24px;
-      background: rgba(255,255,255,0.04);
+      background: linear-gradient(180deg, rgba(255,255,255,0.045), rgba(255,255,255,0.022));
       border: 1px solid rgba(255,255,255,0.08);
+      transition: transform 0.28s ease, border-color 0.28s ease, box-shadow 0.28s ease;
+    }
+
+    .step:hover {
+      transform: translateY(-4px);
+      border-color: rgba(127,92,255,0.24);
+      box-shadow: 0 18px 40px rgba(0,0,0,0.18);
     }
 
     .step strong {
@@ -491,34 +467,14 @@
       letter-spacing: 0.08em;
     }
 
-    .step h3 { margin: 0 0 10px; font-size: 22px; }
-    .step p { margin: 0; color: var(--muted); }
-
-    .cta {
-      padding-bottom: 80px;
+    .step h3 {
+      margin: 0 0 10px;
+      font-size: 22px;
     }
 
-    .cta-card {
-      position: relative;
-      overflow: hidden;
-      background:
-        radial-gradient(circle at 0% 0%, rgba(77,163,255,0.25), transparent 28%),
-        radial-gradient(circle at 100% 100%, rgba(127,92,255,0.24), transparent 28%),
-        linear-gradient(180deg, rgba(255,255,255,0.07), rgba(255,255,255,0.03));
-    }
-
-    .cta-card h2 {
+    .step p {
       margin: 0;
-      font-size: clamp(32px, 4vw, 52px);
-      line-height: 1.02;
-      letter-spacing: -0.03em;
-    }
-
-    .cta-card p {
-      margin: 16px 0 0;
       color: var(--muted);
-      max-width: 760px;
-      font-size: 18px;
     }
 
     footer {
@@ -545,22 +501,83 @@
       cursor: pointer;
     }
 
+    .contact-panel {
+      background:
+        radial-gradient(circle at 100% 0%, rgba(77,163,255,0.12), transparent 24%),
+        linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
+    }
+
+    .contact-form {
+      display: grid;
+      gap: 14px;
+      max-width: 620px;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .field,
+    .field-area {
+      padding: 16px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.1);
+      background: #0d1930;
+      color: white;
+      outline: none;
+    }
+
+    .field::placeholder,
+    .field-area::placeholder {
+      color: #95a9ca;
+    }
+
+    .field:focus,
+    .field-area:focus {
+      border-color: rgba(77,163,255,0.42);
+      box-shadow: 0 0 0 4px rgba(77,163,255,0.08);
+    }
+
+    .field-area {
+      grid-column: 1 / -1;
+      resize: vertical;
+      min-height: 140px;
+    }
+
+    .contact-actions {
+      grid-column: 1 / -1;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .status-text {
+      font-size: 14px;
+      color: var(--muted);
+      align-self: center;
+    }
+
     @media (max-width: 1080px) {
       .about-grid,
-      .cta-grid,
       .grid-5,
       .process {
         grid-template-columns: 1fr 1fr;
       }
-      .dashboard-top,
-      .dashboard-mid,
-      .dashboard-bottom { grid-template-columns: 1fr 1fr; }
-      .hero-card { min-height: auto; }
+    }
+
+    @media (max-width: 900px) {
+      .contact-form {
+        grid-template-columns: 1fr;
+      }
+
+      .field-area,
+      .contact-actions {
+        grid-column: auto;
+      }
     }
 
     @media (max-width: 780px) {
       .nav-inner { min-height: 72px; }
       .menu-btn { display: block; }
+
       .nav-links {
         display: none;
         position: absolute;
@@ -575,15 +592,12 @@
         flex-direction: column;
         align-items: stretch;
       }
+
       .nav-links.open { display: flex; }
 
       .about-grid,
-      .cta-grid,
       .grid-5,
       .process,
-      .dashboard-top,
-      .dashboard-mid,
-      .dashboard-bottom,
       .hero-stats {
         grid-template-columns: 1fr;
       }
@@ -591,6 +605,8 @@
       h1 { font-size: 42px; }
       .section-head { flex-direction: column; align-items: start; }
       .footer-inner { flex-direction: column; align-items: start; }
+      .hero { padding: 84px 0 60px; }
+      .hero p { font-size: 18px; }
     }
   </style>
 </head>
@@ -607,8 +623,7 @@
         <a href="#solucoes">Soluções</a>
         <a href="#sobre">Sobre</a>
         <a href="#processo">Processo</a>
-        
-        
+        <a href="#contato">Contato</a>
       </div>
     </div>
   </nav>
@@ -616,11 +631,16 @@
   <header class="hero" id="inicio">
     <div class="container hero-grid">
       <div class="hero-content">
-        <img src="assets/logo-horizontal-preto.png" alt="SITUA" style="height: 64px; width: auto; margin-bottom: 22px;" />
+        <img src="assets/logo-horizontal-preto.png" alt="SITUA" style="height:72px;width:auto;margin-bottom:26px;filter:drop-shadow(0 12px 32px rgba(77,163,255,0.14));" />
         <div class="eyebrow">Tecnologia integrada para ambientes, operações e experiências conectadas</div>
+
         <h1 class="hero-title">
-          A tecnologia deixa de ser isolada. <span style="background: linear-gradient(135deg, #ffffff, #9cd0ff 42%, #9cb4ff 74%, #90ffe8); -webkit-background-clip: text; background-clip: text; color: transparent;">Na SITUA, tudo conversa.</span>
+          A tecnologia deixa de ser isolada.
+          <span style="background: linear-gradient(135deg, #ffffff, #9cd0ff 42%, #9cb4ff 74%, #90ffe8); -webkit-background-clip: text; background-clip: text; color: transparent;">
+            Na SITUA, tudo conversa.
+          </span>
         </h1>
+
         <p>
           Projetamos soluções que unem atendimento, automação, redes, áudio e vídeo e inteligência de monitoramento em sistemas vivos, bidirecionais e prontos para transformar ambientes em experiências mais eficientes, seguras e memoráveis.
         </p>
@@ -645,6 +665,7 @@
           </div>
         </div>
       </div>
+    </div>
   </header>
 
   <section id="solucoes">
@@ -787,19 +808,22 @@
 
   <section id="contato">
     <div class="container">
-      <div class="panel">
+      <div class="panel contact-panel">
         <div class="eyebrow">Contato</div>
         <h3>Fale com a SITUA</h3>
         <p style="margin-bottom:20px;color:var(--muted);max-width:600px;">
           Envie uma mensagem e retornaremos rapidamente para entender seu projeto.
         </p>
 
-        <form id="contactForm" style="display:grid;gap:14px;max-width:520px;">
-          <input name="nome" placeholder="Seu nome" required style="padding:14px;border-radius:12px;border:1px solid rgba(255,255,255,0.1);background:#0d1930;color:white;" />
-          <input type="email" name="email" placeholder="Seu email" required style="padding:14px;border-radius:12px;border:1px solid rgba(255,255,255,0.1);background:#0d1930;color:white;" />
-          <textarea name="mensagem" placeholder="Sua mensagem" required rows="4" style="padding:14px;border-radius:12px;border:1px solid rgba(255,255,255,0.1);background:#0d1930;color:white;"></textarea>
-          <button class="btn btn-primary" type="submit">Enviar mensagem</button>
-          <span id="formStatus" style="font-size:14px;color:var(--muted);"></span>
+        <form id="contactForm" class="contact-form">
+          <input class="field" name="nome" placeholder="Seu nome" required />
+          <input class="field" type="email" name="email" placeholder="Seu email" required />
+          <textarea class="field-area" name="mensagem" placeholder="Sua mensagem" required rows="5"></textarea>
+
+          <div class="contact-actions">
+            <button class="btn btn-primary" type="submit">Enviar mensagem</button>
+            <span id="formStatus" class="status-text"></span>
+          </div>
         </form>
       </div>
     </div>
@@ -825,15 +849,14 @@
     navLinks?.querySelectorAll('a').forEach(link => {
       link.addEventListener('click', () => navLinks.classList.remove('open'));
     });
-  
 
-    // envio via Cloudflare Pages Function (/api/contact)
     const form = document.getElementById('contactForm');
     const status = document.getElementById('formStatus');
 
     form?.addEventListener('submit', async (e) => {
       e.preventDefault();
       status.textContent = 'Enviando...';
+
       const submitButton = form.querySelector('button');
       if (submitButton) submitButton.disabled = true;
 
@@ -849,17 +872,15 @@
         if (res.ok) {
           status.textContent = 'Mensagem enviada com sucesso!';
           form.reset();
-          if (submitButton) submitButton.disabled = false;
         } else {
           status.textContent = 'Erro ao enviar. Tente novamente.';
-          if (submitButton) submitButton.disabled = false;
         }
       } catch (err) {
         status.textContent = 'Erro de conexão.';
+      } finally {
         if (submitButton) submitButton.disabled = false;
       }
     });
-
   </script>
 </body>
 </html>
