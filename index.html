@@ -9,7 +9,9 @@
   <meta property="og:title" content="SITUA" />
   <meta property="og:description" content="Tecnologia integrada para ambientes, operações e experiências conectadas." />
   <meta property="og:type" content="website" />
-  <meta property="og:image" content="assets/logo-horizontal-preto.svg" />
+  <meta property="og:url" content="https://situa.ai" />
+  <meta property="og:site_name" content="SITUA" />
+  <meta property="og:image" content="assets/logo-horizontal-preto.png" />
   <link rel="icon" href="assets/favicon.ico" />
   <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png" />
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
@@ -102,6 +104,26 @@
 
     .nav-links a:hover { color: var(--text); }
 
+    .nav-links a {
+      position: relative;
+      transition: color 0.25s ease;
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -8px;
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(90deg, rgba(77,163,255,0), rgba(77,163,255,0.95), rgba(127,92,255,0));
+      transform: scaleX(0);
+      transform-origin: center;
+      transition: transform 0.25s ease;
+    }
+
+    .nav-links a:hover::after { transform: scaleX(1); }
+
     .btn {
       display: inline-flex;
       align-items: center;
@@ -130,7 +152,7 @@
     }
 
     .hero {
-      padding: 74px 0 56px;
+      padding: 88px 0 72px;
       position: relative;
       overflow: hidden;
     }
@@ -167,9 +189,9 @@
 
     h1 {
       margin: 0;
-      font-size: clamp(40px, 7vw, 72px);
-      line-height: 0.98;
-      letter-spacing: -0.04em;
+      font-size: clamp(42px, 7vw, 84px);
+      line-height: 0.96;
+      letter-spacing: -0.045em;
     }
 
     .hero p {
@@ -194,10 +216,17 @@
     }
 
     .stat {
-      padding: 18px;
-      border-radius: 18px;
-      background: rgba(255,255,255,0.04);
+      padding: 20px;
+      border-radius: 20px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.055), rgba(255,255,255,0.028));
       border: 1px solid rgba(255,255,255,0.08);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.04);
+      transition: transform 0.25s ease, border-color 0.25s ease;
+    }
+
+    .stat:hover {
+      transform: translateY(-4px);
+      border-color: rgba(77,163,255,0.24);
     }
 
     .stat strong {
@@ -297,7 +326,7 @@
     .signal span:nth-child(4) { height: 58%; }
     .signal span:nth-child(5) { height: 88%; }
 
-    section { padding: 34px 0; }
+    section { padding: 54px 0; }
 
     .section-head {
       display: flex;
@@ -328,19 +357,33 @@
     }
 
     .solution-card {
-      background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
+      background: linear-gradient(180deg, rgba(255,255,255,0.065), rgba(255,255,255,0.028));
       border: 1px solid rgba(255,255,255,0.10);
       border-radius: 24px;
-      padding: 22px;
-      transition: 0.25s ease;
+      padding: 24px;
+      transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
       min-height: 280px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .solution-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(77,163,255,0.08), rgba(77,163,255,0));
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
     }
 
     .solution-card:hover {
-      transform: translateY(-4px);
+      transform: translateY(-6px);
       border-color: rgba(77,163,255,0.35);
-      box-shadow: 0 18px 50px rgba(0,0,0,0.24);
+      box-shadow: 0 22px 60px rgba(0,0,0,0.26);
     }
+
+    .solution-card:hover::before { opacity: 1; }
 
     .icon {
       width: 52px;
@@ -480,9 +523,10 @@
 
     footer {
       border-top: 1px solid rgba(255,255,255,0.08);
-      padding: 24px 0 40px;
+      padding: 28px 0 42px;
       color: var(--muted);
       font-size: 14px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0));
     }
 
     .footer-inner {
@@ -600,8 +644,6 @@
             <span>menos ruído, mais inteligência</span>
           </div>
         </div>
-      </div>
-
       </div>
   </header>
 
@@ -743,7 +785,25 @@
     </div>
   </section>
 
-  
+  <section id="contato">
+    <div class="container">
+      <div class="panel">
+        <div class="eyebrow">Contato</div>
+        <h3>Fale com a SITUA</h3>
+        <p style="margin-bottom:20px;color:var(--muted);max-width:600px;">
+          Envie uma mensagem e retornaremos rapidamente para entender seu projeto.
+        </p>
+
+        <form id="contactForm" style="display:grid;gap:14px;max-width:520px;">
+          <input name="nome" placeholder="Seu nome" required style="padding:14px;border-radius:12px;border:1px solid rgba(255,255,255,0.1);background:#0d1930;color:white;" />
+          <input type="email" name="email" placeholder="Seu email" required style="padding:14px;border-radius:12px;border:1px solid rgba(255,255,255,0.1);background:#0d1930;color:white;" />
+          <textarea name="mensagem" placeholder="Sua mensagem" required rows="4" style="padding:14px;border-radius:12px;border:1px solid rgba(255,255,255,0.1);background:#0d1930;color:white;"></textarea>
+          <button class="btn btn-primary" type="submit">Enviar mensagem</button>
+          <span id="formStatus" style="font-size:14px;color:var(--muted);"></span>
+        </form>
+      </div>
+    </div>
+  </section>
 
   <footer>
     <div class="container footer-inner">
@@ -765,6 +825,41 @@
     navLinks?.querySelectorAll('a').forEach(link => {
       link.addEventListener('click', () => navLinks.classList.remove('open'));
     });
+  
+
+    // envio via Cloudflare Pages Function (/api/contact)
+    const form = document.getElementById('contactForm');
+    const status = document.getElementById('formStatus');
+
+    form?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      status.textContent = 'Enviando...';
+      const submitButton = form.querySelector('button');
+      if (submitButton) submitButton.disabled = true;
+
+      const data = Object.fromEntries(new FormData(form).entries());
+
+      try {
+        const res = await fetch('/api/contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        });
+
+        if (res.ok) {
+          status.textContent = 'Mensagem enviada com sucesso!';
+          form.reset();
+          if (submitButton) submitButton.disabled = false;
+        } else {
+          status.textContent = 'Erro ao enviar. Tente novamente.';
+          if (submitButton) submitButton.disabled = false;
+        }
+      } catch (err) {
+        status.textContent = 'Erro de conexão.';
+        if (submitButton) submitButton.disabled = false;
+      }
+    });
+
   </script>
 </body>
 </html>
